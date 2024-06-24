@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clipboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: rgba(0, 0, 0, 0); /* Fond transparent */
+            color: white;
+            text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.7);
+            margin: 0;
+            padding: 0;
+        }
+
+        .coord {
+            background-color: rgba(0, 0, 0, 0.5); /* Fond semi-transparent */
+            padding: 0.2em 0.5em;
+            margin-bottom: 0.2em;
+            border-radius: 0.2em;
+        }
+    </style>
+    <script>
+        window.addEventListener('message', function(event) {
+            if (event.data.action === 'copy') {
+                var textArea = document.createElement("textarea");
+                textArea.value = event.data.text;
+                document.body.appendChild(textArea);
+                textArea.focus();
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+            }
+        });
+    </script>
+</head>
+<body>
+</body>
+</html>
